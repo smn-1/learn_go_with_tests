@@ -8,10 +8,14 @@ import (
 func TestGreet(t *testing.T) {
 	buffer := bytes.Buffer{}
 	name := "Bob"
-	Greet(&buffer, name)
+	err := Greet(&buffer, name)
 
 	got := buffer.String()
 	want := "Hello, Bob"
+
+	if err != nil {
+		t.Errorf("Greet failed: %v", err)
+	}
 
 	if got != want {
 		t.Errorf("got %q want %q", got, want)
